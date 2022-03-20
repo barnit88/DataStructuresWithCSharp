@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime;
-using System.Diagnostics;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Arrays
 {
@@ -20,15 +19,21 @@ namespace Arrays
     /// 5> Can be used to return multiple values from a function.
     /// 6> Used in dynamic programming to cache answers to subproblems.Eg Knapsack problem 
     /// or coin change problem.
+    /// 
+    /// 
+    /// Example of a Dynamic Array From Static Array
     /// </summary>
     /// 
 
-    public class Array<T> 
+    public class Array<T> : IEnumerator<T>
     {
         private T[] arr;
         private int length = 0; //actual array length
         private int capacity = 0; // capacity of array 
-
+        private int CurrentIndex = 0;
+        public T Current => this.arr[CurrentIndex];
+        object IEnumerator.Current =>
+            this.arr[CurrentIndex];
         public Array()
         {
             this.arr = new T[8];
@@ -90,6 +95,29 @@ namespace Arrays
             this.arr = tempArr;
             return this.arr[index];
         }
+        public bool Remove(T item)
+        {
+            for(int i = 0; i < length; i++)
+            {
+                if(this.arr[i].Equals(item))
+                {
+                    RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+        public int IndexOf(T item)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                if (this.arr[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
         private void ResizeArray()
         {
             if (this.capacity == 0)
@@ -103,6 +131,23 @@ namespace Arrays
                 tempArr[i] = arr[i];
             }
             this.arr = tempArr;
+        }
+        public bool MoveNext()
+        {
+            if(this.CurrentIndex < this.length)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void Reset()
+        {
+            Clear();
+        }
+        public void Dispose()
+        {
+            GC.Collect();
+            return;
         }
     }
 }

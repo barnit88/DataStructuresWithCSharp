@@ -20,6 +20,7 @@ namespace DataStructure
             array.Add(10);
             Console.WriteLine(array.Size());
             array.RemoveAt(4);
+            var x = array.Current;
             Console.WriteLine(array.Size());
 
 
