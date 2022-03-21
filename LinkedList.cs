@@ -79,21 +79,19 @@ namespace LinkedList
         //Internal Node class to represent data
         private class Node<T>
         {
-#nullable enable
             //Node data
-            public T? data;
-#nullable disable
+            public T Data;
             //Previous and Next nodes
-            public Node<T> prev, next;
+            public Node<T> Prev, Next;
             public Node(T data, Node<T> prev, Node<T> next)
             {
-                this.data = data;
-                this.prev = prev;
-                this.next = next;
+                this.Data = data;
+                this.Prev = prev;
+                this.Next = next;
             }
             public override string ToString()
             {
-                return data.ToString();
+                return Data.ToString();
             }
         }
         //Empty Linked List - O(n)
@@ -102,9 +100,9 @@ namespace LinkedList
             Node<T> traverse = Head;
             while(traverse != null)
             {
-                Node<T> next = traverse.next;
-                traverse.prev = traverse.next = null;
-                traverse.data = default;
+                Node<T> next = traverse.Next;
+                traverse.Prev = traverse.Next = null;
+                traverse.Data = default;
                 traverse = next;
             }
             this.Head = this.Tail = traverse = null;
@@ -118,14 +116,71 @@ namespace LinkedList
             else
             {
                 Node<T> traverse = this.Head;
-                while(traverse.next != null)
+                while(traverse.Next != null)
                 {
-                    traverse = traverse.next;
+                    traverse = traverse.Next;
                 }
-                traverse.next = new Node<T>(item, traverse, null);
-                this.Tail = traverse.next;
+                traverse.Next = new Node<T>(item, traverse, null);
+                this.Tail = traverse.Next;
             }
+            Size++;
         }
+        public void AddFirst(T item)
+        {
+            if (this.Head == null)
+                this.Head = this.Tail
+                    = new Node<T>(item, null, null);
+            else
+            {
+                this.Head.Prev = new Node<T>(item, null, Head);
+                this.Head = this.Head.Prev;
+            }
+            Size++;
+        }
+        public bool Remove(T item)
+        {
+            Node<T> traverse = this.Head;
+            for(traverse = this.Head; traverse != null; traverse = traverse.Next)
+            while(traverse.Next != null)
+            {
+                if(traverse.Data.Equals(item))
+                {
+                        if (traverse.Next == null)
+                            traverse.Prev.Next = null;
+                        else if (traverse.Prev == null)
+                            traverse.Next.Prev = null;
+                        else
+                        {
+                            traverse.Prev.Next = traverse.Next;
+                            traverse.Next.Prev = traverse.Prev;
+                        }
+                        traverse.Next = null;
+                        traverse.Prev = null;
+                        traverse.Data = default;
+                }
+            }
+            return false;
+        }
+
+        public bool IsEmpty()
+        {
+            return this.Size == 0;
+        }
+        public T RemoveFirst()
+        {
+            if (IsEmpty())
+                throw new Exception("List is empty.");
+            T remove = this.Head.Data;
+            if(this.Head.Next != null)
+            {
+                this.Head.Next.Prev = null;
+                this.Head = this.Head.Next;
+            }            
+            return remove;
+        }
+
+
+
     }
     
 }
