@@ -94,7 +94,7 @@ namespace LinkedList
                 return Data.ToString();
             }
         }
-        //Empty Linked List - O(n)
+        //Clear Linked List - O(n)
         public void Clear()
         {
             Node<T> traverse = Head;
@@ -107,8 +107,18 @@ namespace LinkedList
             }
             this.Head = this.Tail = traverse = null;
         }
-
-        public void Add(T item)
+        //Check if List is Empty
+        public bool IsEmpty()
+        {
+            return this.Size == 0;
+        }
+        //Size of List
+        public int GetSize()
+        {
+            return Size;
+        }
+        //Adding at TAIL - O(1)
+        public void AddLast(T item)
         {
             if(this.Head == null)
                 this.Head = this.Tail 
@@ -125,6 +135,7 @@ namespace LinkedList
             }
             Size++;
         }
+        //Adding at HEAD - O(1)
         public void AddFirst(T item)
         {
             if (this.Head == null)
@@ -137,6 +148,7 @@ namespace LinkedList
             }
             Size++;
         }
+        //Removing Given Item :- O(n)
         public bool Remove(T item)
         {
             Node<T> traverse = this.Head;
@@ -157,15 +169,12 @@ namespace LinkedList
                         traverse.Next = null;
                         traverse.Prev = null;
                         traverse.Data = default;
+                        Size--;
+                    }
                 }
-            }
             return false;
         }
-
-        public bool IsEmpty()
-        {
-            return this.Size == 0;
-        }
+        //Removing First Item :- O(1)
         public T RemoveFirst()
         {
             if (IsEmpty())
@@ -175,12 +184,50 @@ namespace LinkedList
             {
                 this.Head.Next.Prev = null;
                 this.Head = this.Head.Next;
-            }            
+            }
+            Size--;
             return remove;
         }
-
-
-
+        //Removing Last Item :- O(1)
+        public T RemoveLast()
+        {
+            Node<T> remove = this.Tail;
+            remove.Prev.Next = null;
+            this.Tail = remove.Prev;
+            Size--;
+            return remove.Data;
+        }
+        //Get index of item
+        public int GetIndexOf(T item)
+        {
+            int index= 0;
+            if(GetSize() == 0){
+                return -1;
+            }
+            Node<T> traverse = this.Head;
+            for (traverse = this.Head; traverse.Next != null;traverse = traverse.Next)
+            {
+                index++;
+                if (item.Equals(traverse.Data)){
+                    return index;
+                }
+            }
+            return -1;
+        }
+        //Get Head Data
+        public T PeekFirst()
+        {
+            if (IsEmpty())
+                throw new Exception("Empty List");
+            return this.Head.Data;
+        }
+        //Get Tail Data
+        public T PeekLast()
+        {
+            if (IsEmpty())
+                throw new Exception("Empty List");
+            return this.Tail.Data;
+        }
     }
     
 }
