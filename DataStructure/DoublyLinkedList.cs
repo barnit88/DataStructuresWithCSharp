@@ -99,7 +99,7 @@ namespace LinkedList
         public void Clear()
         {
             Node<T> traverse = Head;
-            while(traverse != null)
+            while (traverse != null)
             {
                 Node<T> next = traverse.Next;
                 traverse.Prev = traverse.Next = null;
@@ -121,13 +121,13 @@ namespace LinkedList
         //Adding at TAIL - O(1)
         public void AddLast(T item)
         {
-            if(this.Head == null)
-                this.Head = this.Tail 
+            if (this.Head == null)
+                this.Head = this.Tail
                     = new Node<T>(item, null, null);
             else
             {
                 Node<T> traverse = this.Head;
-                while(traverse.Next != null)
+                while (traverse.Next != null)
                 {
                     traverse = traverse.Next;
                 }
@@ -153,26 +153,27 @@ namespace LinkedList
         public bool Remove(T item)
         {
             Node<T> traverse = this.Head;
-            for(traverse = this.Head; traverse != null; traverse = traverse.Next)
-            while(traverse.Next != null)
+            //for(traverse = this.Head; traverse != null; traverse = traverse.Next)
+            while (traverse.Next != null)
             {
-                if(traverse.Data.Equals(item))
+                if (traverse.Data.Equals(item))
                 {
-                        if (traverse.Next == null)
-                            traverse.Prev.Next = null;
-                        else if (traverse.Prev == null)
-                            traverse.Next.Prev = null;
-                        else
-                        {
-                            traverse.Prev.Next = traverse.Next;
-                            traverse.Next.Prev = traverse.Prev;
-                        }
-                        traverse.Next = null;
-                        traverse.Prev = null;
-                        traverse.Data = default;
-                        Size--;
+                    if (traverse.Next == null)
+                        traverse.Prev.Next = null;
+                    else if (traverse.Prev == null)
+                        traverse.Next.Prev = null;
+                    else
+                    {
+                        traverse.Prev.Next = traverse.Next;
+                        traverse.Next.Prev = traverse.Prev;
                     }
+                    traverse.Next = null;
+                    traverse.Prev = null;
+                    traverse.Data = default;
+                    Size--;
+                    return true;
                 }
+            }
             return false;
         }
         //Removing First Item :- O(1)
@@ -181,10 +182,14 @@ namespace LinkedList
             if (IsEmpty())
                 throw new Exception("List is empty.");
             T remove = this.Head.Data;
-            if(this.Head.Next != null)
+            if (this.Head.Next != null)
             {
                 this.Head.Next.Prev = null;
                 this.Head = this.Head.Next;
+            }
+            else
+            {
+                this.Head = this.Tail = null;
             }
             Size--;
             return remove;
@@ -192,24 +197,34 @@ namespace LinkedList
         //Removing Last Item :- O(1)
         public T RemoveLast()
         {
+            if (GetSize() == 0)
+                throw new ArgumentOutOfRangeException();
+
             Node<T> remove = this.Tail;
-            remove.Prev.Next = null;
-            this.Tail = remove.Prev;
+            if (this.Head.Next == null)
+                this.Head = this.Tail = null;
+            else
+            {
+                this.Tail.Prev.Next = null;
+                this.Tail = this.Tail.Prev;
+            }
             Size--;
             return remove.Data;
         }
         //Get index of item
         public int GetIndexOf(T item)
         {
-            int index= 0;
-            if(GetSize() == 0){
+            int index = 0;
+            if (GetSize() == 0)
+            {
                 return -1;
             }
             Node<T> traverse = this.Head;
-            for (traverse = this.Head; traverse.Next != null;traverse = traverse.Next)
+            for (traverse = this.Head; traverse.Next != null; traverse = traverse.Next)
             {
                 index++;
-                if (item.Equals(traverse.Data)){
+                if (item.Equals(traverse.Data))
+                {
                     return index;
                 }
             }
@@ -234,28 +249,32 @@ namespace LinkedList
         {
             T[] dataArray = new T[Size];
             int index = 0;
-            for (Node<T> traverse = Head; traverse.Next != null; traverse = traverse.Next)
+            for (Node<T> traverse = Head; traverse != null; traverse = traverse.Next)
             {
                 dataArray[index] = traverse.Data;
                 index++;
             }
-            dataArray[index] = this.Tail.Data;
             return dataArray.OfType<T>().GetEnumerator();
+        }
+
+        public IEnumerable<T> GetReverseEnumerator()
+        {
+            T[] dataArray = new T[Size];
+            int index = 0;
+            for (Node<T> traverse = Tail; traverse != null; traverse = traverse.Prev)
+            {
+                dataArray[index] = traverse.Data;
+                index++;
+            }
+            return dataArray;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            T[] dataArray = new T[Size];
-            int index = 0;
-            for (Node<T> traverse = Head; traverse.Next != null; traverse = traverse.Next)
-            {
-                dataArray[index] = traverse.Data;
-                index++;
-            }
-            dataArray[index] = this.Tail.Data;
-            return dataArray.GetEnumerator();
+            throw new NotImplementedException();
         }
- 
+
+
     }
-    
+
 }

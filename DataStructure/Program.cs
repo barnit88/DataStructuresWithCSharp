@@ -22,6 +22,15 @@ namespace DataStructure
             {
                 Console.WriteLine(data);
             }
+            var datas = integerlist.GetReverseEnumerator();
+            foreach(var da in datas)
+            {
+                Console.WriteLine(da);
+            }
+            //while (datas.MoveNext())
+            //{
+            //    Console.WriteLine(datas.Current);
+            //}
             Console.WriteLine("Hello World!");
             Console.ReadKey();
 
