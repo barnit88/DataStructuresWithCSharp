@@ -75,7 +75,7 @@ namespace DSA.Test
         [InlineData(new int[] { 1, 2, 3, 4, 5, 6 })]
         [InlineData(new int[] { 1230, 1231, 12, 31, 231, 3, 1231, 32 })]
         [InlineData(new int[] { 12, 31, 23, 23, 213, 2, 13, 12 })]
-        public void AddFirst_AddMultipleElementAtLast(int[] integerArray)
+        public void AddLast_AddMultipleElementAtLast(int[] integerArray)
         {
             foreach (int value in integerArray)
             {
@@ -174,6 +174,7 @@ namespace DSA.Test
             Random random = new Random();
             int randomNumber = random.Next(0, integerArray.Length - 1);
             Assert.True(doublyIntegerList.Remove(integerArray[randomNumber]));
+            //Assert.True(doublyIntegerList.Remove(integerArray[3]));
         }
 
         [Theory]

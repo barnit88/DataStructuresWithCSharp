@@ -126,13 +126,16 @@ namespace LinkedList
                     = new Node<T>(item, null, null);
             else
             {
-                Node<T> traverse = this.Head;
-                while (traverse.Next != null)
-                {
-                    traverse = traverse.Next;
-                }
-                traverse.Next = new Node<T>(item, traverse, null);
-                this.Tail = traverse.Next;
+                //Node<T> traverse = this.Head;
+                //while (traverse.Next != null)
+                //{
+                //    traverse = traverse.Next;
+                //}
+                //traverse.Next = new Node<T>(item, traverse, null);
+                //this.Tail = traverse.Next;
+                this.Tail.Next = new Node<T>(item, this.Tail, null);
+                this.Tail = this.Tail.Next;
+                //traverse.Next = new Node<T>(item, traverse, null);
             }
             Size++;
         }
@@ -173,6 +176,7 @@ namespace LinkedList
                     Size--;
                     return true;
                 }
+                traverse = traverse.Next;
             }
             return false;
         }
