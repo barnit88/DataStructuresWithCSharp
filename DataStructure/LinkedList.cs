@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -71,7 +72,7 @@ namespace LinkedList
     /// REMOVE IN MIDDLE :-O(n)
     ///  
     /// </summary>
-    public class DoublyLinkedList<T> 
+    public class DoublyLinkedList<T> : IEnumerable<T>
     {
         private int Size = 0;
         private Node<T> Head = null;
@@ -228,6 +229,33 @@ namespace LinkedList
                 throw new Exception("Empty List");
             return this.Tail.Data;
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            T[] dataArray = new T[Size];
+            int index = 0;
+            for (Node<T> traverse = Head; traverse.Next != null; traverse = traverse.Next)
+            {
+                dataArray[index] = traverse.Data;
+                index++;
+            }
+            dataArray[index] = this.Tail.Data;
+            return dataArray.OfType<T>().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            T[] dataArray = new T[Size];
+            int index = 0;
+            for (Node<T> traverse = Head; traverse.Next != null; traverse = traverse.Next)
+            {
+                dataArray[index] = traverse.Data;
+                index++;
+            }
+            dataArray[index] = this.Tail.Data;
+            return dataArray.GetEnumerator();
+        }
+ 
     }
     
 }

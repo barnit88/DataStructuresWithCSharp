@@ -9,7 +9,7 @@ namespace DSA.Test
     /// <summary>
     /// Unit Testing
     /// 
-    /// Fact is used to check single set of data 
+    /// Fact is doesnt allows to pass data
     /// 
     /// Theory is used to pass multiple sets of data into 
     /// the test method using InlineData decorator
@@ -49,47 +49,52 @@ namespace DSA.Test
 
         [Theory]
         [InlineData(new int[] { 1, 2, 3, 4, 5, 6 })]
-        public void AddFirst_AddMultipleElement(int[] integerArray)
+        [InlineData(new int[] { 1230,1231,12,31,231,3,1231,32 })]
+        [InlineData(new int[] { 12,31,23,23,213,2,13,12})]
+        public void AddFirst_AddMultipleElementAtFirst(int[] integerArray)
         {
-            var x = nameof(data);
             foreach (int value in integerArray)
             {
                 doublyIntegerList.AddFirst(value);
             }
+            var expectedSize = integerArray.Length;
+            var actualSize = doublyIntegerList.GetSize();
+            Assert.Equal(expectedSize, actualSize);
+            Assert.False(doublyIntegerList.IsEmpty());
+            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[integerArray.Length - 1]);
+            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[0]);
+            int index = integerArray.Length - 1;
+            foreach (int value in doublyIntegerList)
+            {
+                Assert.Equal(value, integerArray[index]);
+                index--;
+            }
         }
-        //public static IEnumerable<object[]> person => new List<Person>(){new Person() { firstName = "barnit", lastName = "basnet" }};
-        
-        //[Theory]
-        //[MemberData(nameof(person),null)]
-        //public void AddFirsts_AddMultipleElement(Person person)
-        //{
-        //    var x = nameof(data);
-        //    foreach (int value in integerArray)
-        //    {
-        //        doublyIntegerList.AddFirst(value);
-        //    }
-        //}
-        //[Fact]
-        //public void Test1()
-        //{
-        //    Assert.Equal(5, 5);
-        //    Assert.NotEqual(5, 5);
-        //}
-
-        //[Theory]
-        //[InlineData(1,2)]
-        //public void Test2(int x , int y)
-        //{
-        //    Assert.Equal(5, 5);
-        //    Assert.NotEqual(5, 5);
-        //}
 
 
-        //public void Test3(int x, int y)
-        //{
-        //    Assert.Equal(5, 5);
-        //    Assert.NotEqual(5, 5);
-        //}
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5, 6 })]
+        [InlineData(new int[] { 1230, 1231, 12, 31, 231, 3, 1231, 32 })]
+        [InlineData(new int[] { 12, 31, 23, 23, 213, 2, 13, 12 })]
+        public void AddFirst_AddMultipleElementAtLast(int[] integerArray)
+        {
+            foreach (int value in integerArray)
+            {
+                doublyIntegerList.AddLast(value);
+            }
+            var expectedSize = integerArray.Length;
+            var actualSize = doublyIntegerList.GetSize();
+            Assert.Equal(expectedSize, actualSize);
+            Assert.False(doublyIntegerList.IsEmpty());
+            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[integerArray.Length - 1]);
+            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[0]);
+            int index = 0;
+            foreach (int value in doublyIntegerList)
+            {
+                Assert.Equal(value, integerArray[index]);
+                index++;
+            }
+        }
     }
 
 }
