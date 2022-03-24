@@ -3,7 +3,6 @@ using Xunit;
 using LinkedList;
 using System.Collections.Generic;
 using Xunit.Extensions;
-using DataStructure;
 
 namespace DSA.Test
 {
@@ -15,35 +14,34 @@ namespace DSA.Test
     /// Theory is used to pass multiple sets of data into 
     /// the test method using InlineData decorator
     /// </summary>
-    public class DoublyLinkedListTest
+    public class SinglyLinkedListTest
     {
         //Intializing Class
-        DoublyLinkedList<int> doublyIntegerList = new();
-        DoublyLinkedList<string> doublyStringList = new();
+        DoublyLinkedList<int> singlyList = new();
 
         [Fact]
         public void IsEmpty_SizeIsZero_IntegerInput()
         {
-            int actual = doublyIntegerList.GetSize();
+            int actual = singlyList.GetSize();
             int expected = 0;
             Assert.Equal(expected, actual);
-            Assert.Throws<Exception>(() => doublyIntegerList.PeekFirst());
-            Assert.Throws<Exception>(() => doublyIntegerList.PeekLast());
+            Assert.Throws<Exception>(() => singlyList.PeekFirst());
+            Assert.Throws<Exception>(() => singlyList.PeekLast());
         }
 
         [Fact]
         public void AddFirst_AddSingleElement()
         {
             int item = 1;
-            doublyIntegerList.AddFirst(item);
-            if (doublyIntegerList.GetSize() == 1)
+            singlyList.AddFirst(item);
+            if (singlyList.GetSize() == 1)
             {
-                Assert.Equal(item, doublyIntegerList.PeekFirst());
-                Assert.Equal(item, doublyIntegerList.PeekLast());
+                Assert.Equal(item, singlyList.PeekFirst());
+                Assert.Equal(item, singlyList.PeekLast());
             }
             else
             {
-                Assert.Equal(item, doublyIntegerList.PeekFirst());
+                Assert.Equal(item, singlyList.PeekFirst());
             }
         }
 
@@ -55,16 +53,16 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddFirst(value);
+                singlyList.AddFirst(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[integerArray.Length - 1]);
-            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[0]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekFirst(), integerArray[integerArray.Length - 1]);
+            Assert.Equal(singlyList.PeekLast(), integerArray[0]);
             int index = integerArray.Length - 1;
-            foreach (int value in doublyIntegerList)
+            foreach (int value in singlyList)
             {
                 Assert.Equal(value, integerArray[index]);
                 index--;
@@ -78,19 +76,18 @@ namespace DSA.Test
         [InlineData(new int[] { 12, 31, 23, 23, 213, 2, 13, 12 })]
         public void AddLast_AddMultipleElementAtLast(int[] integerArray)
         {
-            
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[integerArray.Length - 1]);
-            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[0]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekLast(), integerArray[integerArray.Length - 1]);
+            Assert.Equal(singlyList.PeekFirst(), integerArray[0]);
             int index = 0;
-            foreach (int value in doublyIntegerList)
+            foreach (int value in singlyList)
             {
                 Assert.Equal(value, integerArray[index]);
                 index++;
@@ -105,13 +102,13 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddFirst(value);
+                singlyList.AddFirst(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[integerArray.Length-1]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekFirst(), integerArray[integerArray.Length-1]);
         }
         [Theory]
         [InlineData(new int[] { 1, 2, 3, 4, 5, 6 })]
@@ -121,13 +118,13 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekFirst(), integerArray[0]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekFirst(), integerArray[0]);
         }
 
         [Theory]
@@ -138,13 +135,13 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddFirst(value);
+                singlyList.AddFirst(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[0]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekLast(), integerArray[0]);
         }
         [Theory]
         [InlineData(new int[] { 1, 2, 3, 4, 5, 6 })]
@@ -154,13 +151,13 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
             var expectedSize = integerArray.Length;
-            var actualSize = doublyIntegerList.GetSize();
+            var actualSize = singlyList.GetSize();
             Assert.Equal(expectedSize, actualSize);
-            Assert.False(doublyIntegerList.IsEmpty());
-            Assert.Equal(doublyIntegerList.PeekLast(), integerArray[integerArray.Length - 1]);
+            Assert.False(singlyList.IsEmpty());
+            Assert.Equal(singlyList.PeekLast(), integerArray[integerArray.Length - 1]);
         }
 
         [Theory]
@@ -171,12 +168,12 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
             Random random = new Random();
             int randomNumber = random.Next(0, integerArray.Length - 1);
-            Assert.True(doublyIntegerList.Remove(integerArray[randomNumber]));
-            //Assert.True(doublyIntegerList.Remove(integerArray[3]));
+            Assert.True(singlyList.Remove(integerArray[randomNumber]));
+            //Assert.True(singlyList.Remove(integerArray[3]));
         }
 
         [Theory]
@@ -187,10 +184,10 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
-            Assert.Equal(integerArray[0],doublyIntegerList.RemoveFirst());
-            var actual = doublyIntegerList.GetSize();
+            Assert.Equal(integerArray[0],singlyList.RemoveFirst());
+            var actual = singlyList.GetSize();
             Assert.Equal(integerArray.Length, actual + 1);
         }
 
@@ -202,10 +199,10 @@ namespace DSA.Test
         {
             foreach (int value in integerArray)
             {
-                doublyIntegerList.AddLast(value);
+                singlyList.AddLast(value);
             }
-            Assert.Equal(integerArray[integerArray.Length-1], doublyIntegerList.RemoveLast());
-            var actual = doublyIntegerList.GetSize();
+            Assert.Equal(integerArray[integerArray.Length-1], singlyList.RemoveLast());
+            var actual = singlyList.GetSize();
             Assert.Equal(integerArray.Length, actual + 1);
         }
 

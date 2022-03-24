@@ -105,6 +105,7 @@ namespace LinkedList
                 traverse.Prev = traverse.Next = null;
                 traverse.Data = default;
                 traverse = next;
+                Size--;
             }
             this.Head = this.Tail = traverse = null;
         }
@@ -278,7 +279,12 @@ namespace LinkedList
             throw new NotImplementedException();
         }
 
-
+        ~DoublyLinkedList()
+        {
+            Console.WriteLine("Destructor Called");
+            GC.Collect();
+            Console.WriteLine("Destructor Exited");
+        }
     }
 
 }
