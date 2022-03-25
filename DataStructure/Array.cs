@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Arrays
 {
@@ -39,15 +40,12 @@ namespace Arrays
     /// </summary>
     /// 
 
-    public class Array<T> : IEnumerator<T>
+    public class Array<T> : IEnumerable<T>
     {
         private T[] arr;
         private int length = 0; //actual array length
         private int capacity = 0; // capacity of array 
-        private int CurrentIndex = 0;
-        public T Current => this.arr[CurrentIndex];
-        object IEnumerator.Current =>
-            this.arr[CurrentIndex];
+
         public Array()
         {
             this.arr = new T[8];
@@ -146,14 +144,7 @@ namespace Arrays
             }
             this.arr = tempArr;
         }
-        public bool MoveNext()
-        {
-            if(this.CurrentIndex < this.length)
-            {
-                return true;
-            }
-            return false;
-        }
+   
         public void Reset()
         {
             Clear();
@@ -161,7 +152,16 @@ namespace Arrays
         public void Dispose()
         {
             GC.Collect();
-            return;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return arr.OfType<T>().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
