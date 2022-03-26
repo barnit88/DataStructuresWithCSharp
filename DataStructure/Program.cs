@@ -1,5 +1,6 @@
 ﻿using System;
 using Arrays;
+using System.Collections.Generic;
 using LinkedList;
 
 namespace DataStructure
@@ -8,9 +9,7 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
-
-            StackImplementation.Stack<int> stack = new();
-            Console.WriteLine(stack.Peek());
+            PriorityQueue
             Console.WriteLine("Hello World!");
             Console.ReadKey();
 

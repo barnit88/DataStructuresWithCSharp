@@ -102,20 +102,37 @@ namespace QueueImplementation
     ///  child node.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PriorityQueue<T> : IComparable<T>
+    public class PriorityQueue<T> : IComparable<T> 
     {
-        //No of elements currently inside the Heap
-        private int heapSize = 0;
-        //Internal capacity of Heap
-        private int heapCapacity = 0;
-        //A dynamic list to track the elements inside the Heap
-        //List is a collection of strongly typed object.
-        //List is equivalent to ArrayList as it is
-        //generic version of ArrayList which can 
-        //grow its size dynamically.
-        private List<T> heap = null;
-        
 
+        private class Node
+        {
+            public int Priority { get; set; }
+            public  T Item { get; set; }
+        }
+
+        private Node[] queue;
+        private int heapSize = -1;
+        private bool isMinPriorityQueue;
+        public int Count { get { return queue.Length; } }
+        public PriorityQueue(bool isMinQueueOrMaxQueue = false)
+        {
+            this.isMinPriorityQueue = isMinQueueOrMaxQueue;
+        }
+        private int LeftChild(int parent)
+        {
+            return 2 * parent + 1;
+        }
+        private int RightChild(int parent)
+        {
+            return 2 * parent + 2;
+        }
+        private void Swap(int i , int j)
+        {
+            var temp = queue[i];
+            queue[i] = queue[j];
+            queue[j] = temp;
+        }
         public int CompareTo(T? other)
         {
             throw new NotImplementedException();
@@ -123,3 +140,4 @@ namespace QueueImplementation
     }
 
 }
+
