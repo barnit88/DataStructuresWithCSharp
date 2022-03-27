@@ -1,5 +1,7 @@
 ﻿using LinkedList;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace QueueImplementation
 {
@@ -36,7 +38,7 @@ namespace QueueImplementation
     /// ####
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Queue<T>
+    public class Queue<T> :IEnumerable<T>
     {
         private DoublyLinkedList<T> linkedList = new();
         private int Size = 0;
@@ -78,6 +80,16 @@ namespace QueueImplementation
         {
             linkedList.Clear();
             Size = linkedList.GetSize();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return linkedList.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 

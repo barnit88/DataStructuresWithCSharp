@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using QueueImplementation;
 
 namespace BinaryHeap
 {
@@ -38,11 +39,85 @@ namespace BinaryHeap
         /// </summary>
         public override int HeapLength { get; set; } = 0;
         protected override T[] heap { get; set; }
+        
+        /// <summary>
+        /// Checks if element is in the Heap
+        /// </summary>
+        /// <param name="item">Element to check</param>
+        /// <returns>Return true if element exist otherise false</returns>
         public override bool Contains(T item)
         {
-            throw new NotImplementedException();
-        }
+            int root = 0;
 
+            QueueImplementation.Queue<int> queuedIndex = new();
+            if (this.HeapLength == 0)
+                throw new Exception("Heap is empty");
+
+            queuedIndex.Enqueue(root);
+            while (queuedIndex.Count() > 0)
+            {
+                if (Contain(item, root))
+                {
+                    Console.WriteLine(root);
+                    Console.WriteLine("Form Parent");
+                    return true;
+                }
+
+                if (ChildNodeContainsItem(item, root))
+                {
+                    int leftChild = LeftChild(root);
+                    int rightChild = RightChild(root);
+                    if (Contain(item, leftChild))
+                    {
+                        Console.WriteLine(leftChild);
+                        Console.WriteLine("Form Left Child");
+                        return true;
+                    }
+                    queuedIndex.Enqueue(leftChild);
+                    if (Contain(item, rightChild))
+                    {
+                        Console.WriteLine(rightChild);
+                        Console.WriteLine("Form Right Child");
+                        return true;
+                    }
+                    queuedIndex.Enqueue(rightChild);
+                }
+                root = queuedIndex.Dequeue();
+
+
+                //queuedIndex.Enqueue(leftChild);
+                //if (Contain(item, rightChild))
+                //    return true;
+                //queuedIndex.Enqueue(rightChild);
+                //root = queuedIndex.Dequeue();
+                //if (root > this.HeapLength)
+                //    return false;
+            }
+        
+            return false;
+        }
+        private bool Contain(T item,int index)
+        {
+            if(this.heap[index].CompareTo(item)== 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool ChildNodeContainsItem(T item, int parent)
+        {
+            if(this.heap[parent].CompareTo(item) < 0){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
         protected override void Heapify(int index)
         {
             if (index > HeapLength)

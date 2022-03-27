@@ -1,8 +1,8 @@
 ﻿using System;
 using Arrays;
-using System.Collections.Generic;
 using LinkedList;
 using BinaryHeap;
+using QueueImplementation;
 
 namespace DataStructure
 {
@@ -10,8 +10,9 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
+         
 
-            
+
             MinHeap<int> minHeap = new();
             minHeap.Insert(1);
             minHeap.Insert(10);
@@ -20,11 +21,12 @@ namespace DataStructure
             minHeap.Insert(3);
             minHeap.Insert(5);
             minHeap.Insert(6);
-            foreach (var min in minHeap)
+            Console.WriteLine(minHeap.Contains(3));
+            Console.WriteLine("---------");
+            foreach(var x in minHeap)
             {
-                Console.WriteLine(min);
+                Console.WriteLine(x);
             }
-            Console.WriteLine(100.CompareTo(2));
             Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
