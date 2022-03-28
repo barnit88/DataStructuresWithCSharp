@@ -6,6 +6,9 @@ using System.Linq;
 namespace Arrays
 {
     /// <summary>
+    /// ### Dynamic Array ###
+    /// Dynamic array are arrays that can grow its size
+    /// 
     /// A static array is a fixed length container containing n elements
     /// indexable from the range 0 to n-1.
     /// 
@@ -40,13 +43,13 @@ namespace Arrays
     /// </summary>
     /// 
 
-    public class Array<T> : IEnumerable<T>
+    public class DynamicArray<T> : IEnumerable<T>
     {
         private T[] arr;
         private int length = 0; //actual array length
         private int capacity = 0; // capacity of array 
 
-        public Array()
+        public DynamicArray()
         {
             this.arr = new T[8];
             this.capacity = 8;
@@ -54,7 +57,7 @@ namespace Arrays
             //object[] objectArray = new object[10];
             //this.arr = objectArray.OfType<T>().ToArray();
         }
-        public Array(int capacity)
+        public DynamicArray(int capacity)
         {
             if (capacity < 0)
                 throw new Exception("Invalid Capacity " + capacity);

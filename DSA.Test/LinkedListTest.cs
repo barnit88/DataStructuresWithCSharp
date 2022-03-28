@@ -59,18 +59,18 @@ namespace DSA.Test
                 doublyIntegerList.AddFirst(value);
             }
         }
-        public static IEnumerable<object[]> person => new List<Person>(){new Person() { firstName = "barnit", lastName = "basnet" }};
+        //public static IEnumerable<object[]> person =>(List<object>) new List<Person>(){new Person() { firstName = "barnit", lastName = "basnet" }};
         
-        [Theory]
-        [MemberData(nameof(person),null)]
-        public void AddFirsts_AddMultipleElement(Person person)
-        {
-            var x = nameof(data);
-            foreach (int value in integerArray)
-            {
-                doublyIntegerList.AddFirst(value);
-            }
-        }
+        //[Theory]
+        //[MemberData(nameof(person),null)]
+        //public void AddFirsts_AddMultipleElement(Person person)
+        //{
+        //    var x = nameof(data);
+        //    foreach (int value in integerArray)
+        //    {
+        //        doublyIntegerList.AddFirst(value);
+        //    }
+        //}
         //[Fact]
         //public void Test1()
         //{

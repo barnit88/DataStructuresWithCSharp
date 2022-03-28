@@ -3,6 +3,8 @@ using Arrays;
 using LinkedList;
 using BinaryHeap;
 using QueueImplementation;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace DataStructure
 {
@@ -10,23 +12,26 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
-         
 
 
-            MinHeap<int> minHeap = new();
-            minHeap.Insert(1);
-            minHeap.Insert(10);
-            minHeap.Insert(100);
-            minHeap.Insert(2);
-            minHeap.Insert(3);
-            minHeap.Insert(5);
-            minHeap.Insert(6);
-            Console.WriteLine(minHeap.Contains(3));
-            Console.WriteLine("---------");
-            foreach(var x in minHeap)
-            {
-                Console.WriteLine(x);
-            }
+            int[] arr = { 1, 2, 3, 4, 5, 56, 67, 12 };
+            List<int> arrList = new List<int>(){ 1, 2, 3, 4, 5, 56, 67, 12 };
+            Console.WriteLine(arrList);
+            //MinHeap<int> minHeap = new MinHeap<int>(arr);
+            //MinHeap<int> minHeap1 = new MinHeap<int>(arrList);
+            //minHeap.Insert(1);
+            //minHeap.Insert(10);
+            //minHeap.Insert(100);
+            //minHeap.Insert(2);
+            //minHeap.Insert(3);
+            //minHeap.Insert(5);
+            //minHeap.Insert(6);
+            //Console.WriteLine(minHeap.Contains(3));
+            //Console.WriteLine("---------");
+            //foreach(var x in minHeap)
+            //{
+            //    Console.WriteLine(x);
+            //}
             Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
