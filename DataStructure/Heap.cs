@@ -372,7 +372,15 @@ namespace BinaryHeap
             }
             this.HeapCapacity = heap.Capacity;
         }
-        
+        /// <summary>
+        /// Indexer
+        /// </summary>
+        /// <param name="index">Index</param>
+        /// <returns>Return Heap element from index</returns>
+        public T this[int index]
+        {
+            get { return this.heap[index]; }
+        }
         /// <summary>
         /// Dynamic Array As Heap
         /// </summary>
