@@ -15,10 +15,11 @@ namespace DataStructure
 
 
             int[] arr = { 1, 2, 3, 4, 5, 56, 67, 12 };
-            List<int> arrList = new List<int>(){ 1, 2, 3, 4, 5, 56, 67, 12 };
+            List<string> arrList = new List<string>(){ 
+                "Barnit","Basnet","Heapify","Element","Apple"};
             Console.WriteLine(arrList);
             //MinHeap<int> minHeap = new MinHeap<int>(arr);
-            //MinHeap<int> minHeap1 = new MinHeap<int>(arrList);
+            
             //minHeap.Insert(1);
             //minHeap.Insert(10);
             //minHeap.Insert(100);

@@ -1,10 +1,7 @@
-﻿using LinkedList;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using QueueImplementation;
-using Arrays;
 /// <summary>
 /// A Binary Heap or Heap is a Tree based Data Structure 
 /// where the tree is a complete Binary tree.
@@ -339,8 +336,11 @@ namespace BinaryHeap
             }
         }
     }
-
-    public abstract class Heap<T> : IHeap<T>, IEnumerable<T>
+    /// <summary>
+    /// Base Class for Heap
+    /// </summary>
+    /// <typeparam name="T">Type that are comparable </typeparam>
+    public abstract class Heap<T> : IHeap<T>, IEnumerable<T> where T : IComparable
     {
         /// <summary>
         /// Create Heap with default Heap Capacity
@@ -365,18 +365,14 @@ namespace BinaryHeap
         /// <param name="collection">Enumerable</param>
         public Heap(IEnumerable<T> collection)
         {
-            this.heap = collection.ToList();
+            this.heap = new List<T>();
+            foreach(var item in collection)
+            {
+                Insert(item);
+            }
             this.HeapCapacity = heap.Capacity;
         }
-        /// <summary>
-        /// Create heap with List
-        /// </summary>
-        /// <param name="collection">List of items</param>
-        public Heap(List<T> collection)
-        {
-            this.heap = collection;
-            this.HeapCapacity = heap.Capacity;
-        }
+        
         /// <summary>
         /// Dynamic Array As Heap
         /// </summary>
@@ -436,18 +432,19 @@ namespace BinaryHeap
         protected abstract void Heapify(int index);
         /// <summary>
         /// Insert item into Heap.
-        /// Heap inserts item into the root of the Heap
+        /// Heap inserts item into the right most empty node
         /// </summary>
         /// <param name="element">Item</param>
         public virtual void Insert(T element)
         {
-            this.heap[this.HeapLength] = element;
+            this.heap.Add(element);
             int temp = this.HeapLength;
             this.HeapLength++;
             Heapify(temp);
         }
         /// <summary>
-        /// Remove item from Heap
+        /// Remove item from Heap.
+        /// Heap removes the item at the root
         /// </summary>
         /// <returns>Removed Item</returns>
         public virtual T Remove()
@@ -487,7 +484,6 @@ namespace BinaryHeap
             this.HeapLength = default;
             this.HeapCapacity = default;
         }
-
         public IEnumerator<T> GetEnumerator()
         {
             T[] arr = new T[this.HeapLength];
@@ -497,7 +493,6 @@ namespace BinaryHeap
             }
             return arr.OfType<T>().GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
