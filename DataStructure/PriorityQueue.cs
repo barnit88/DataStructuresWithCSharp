@@ -1,4 +1,5 @@
-﻿using LinkedList;
+﻿using BinaryHeap;
+using LinkedList;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +21,11 @@ namespace QueueImplementation
     /// assign relative priorities to each element.
     /// 
     /// ### Abstract Data Type 
-    /// 
+    /// Abstract Data Type is are those data type which can perform 
+    /// certain set of operations but how doesn't care about how it is 
+    /// implemented. It does not specify how data is to be stored in 
+    /// the memory and what algorithms will be used for implementating 
+    /// the operations.
     /// 
     /// ### What is a HEAP?
     /// A heap is a tree based Data Struture that statisfies the
@@ -102,42 +107,73 @@ namespace QueueImplementation
     ///  child node.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PriorityQueue<T> : IComparable<T> 
+    public class PriorityQueue<T> : IPriorityQueue<T> where T : IComparable<T> 
     {
 
-        private class Node
+        private MinHeap<Node> minHeap;
+        public PriorityQueue(){}
+        /// <summary>
+        /// Remove item from queue
+        /// </summary>
+        /// <returns></returns>
+        public T Dequeue()
         {
-            public int Priority { get; set; }
-            public  T Item { get; set; }
+            return minHeap.Remove().Data;
         }
-
-        private Node[] queue;
-        private int heapSize = -1;
-        private bool isMinPriorityQueue;
-        public int Count { get { return queue.Length; } }
-        public PriorityQueue(bool isMinQueueOrMaxQueue = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="priority"></param>
+        /// <param name="item"></param>
+        public void Enqueue(int priority,T item)
         {
-            this.isMinPriorityQueue = isMinQueueOrMaxQueue;
+            var node = new Node(priority, item);
+            minHeap.Insert(node);
         }
-        private int LeftChild(int parent)
-        {
-            return 2 * parent + 1;
-        }
-        private int RightChild(int parent)
-        {
-            return 2 * parent + 2;
-        }
-        private void Swap(int i , int j)
-        {
-            var temp = queue[i];
-            queue[i] = queue[j];
-            queue[j] = temp;
-        }
-        public int CompareTo(T? other)
+        public void GetPriority(T item)
         {
             throw new NotImplementedException();
         }
+        public bool IsInQueue(T item)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdatePriority(T item)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Each Node contains the data and priority of the data
+        /// </summary>
+        private class Node : IComparable
+        {
+            public Node(int priority,T data)
+            {
+                Priority = priority;
+                Data = data;
+            }
+            /// <summary>
+            /// Priority of the data
+            /// </summary>
+            public int Priority { get; set; }
+            /// <summary>
+            /// Item that holds data
+            /// </summary>
+            public T Data { get; set; }
+            public int CompareTo(object obj)
+            {
+                return this.Priority.CompareTo(((Node)obj).Priority);
+            }
+        }
     }
+    public interface IPriorityQueue<T>
+    {
+        T Dequeue();
+        void Enqueue(int priority,T item);
+        bool IsInQueue(T item);
+        void GetPriority(T item);
+        void UpdatePriority(T item);
 
+    }
 }
 

@@ -41,8 +41,6 @@ namespace Arrays
     /// 
     /// Example of a Dynamic Array From Static Array
     /// </summary>
-    /// 
-
     public class DynamicArray<T> : IEnumerable<T>
     {
         private T[] arr;
@@ -147,7 +145,6 @@ namespace Arrays
             }
             this.arr = tempArr;
         }
-   
         public void Reset()
         {
             Clear();
@@ -156,12 +153,10 @@ namespace Arrays
         {
             GC.Collect();
         }
-
         public IEnumerator<T> GetEnumerator()
         {
             return arr.OfType<T>().GetEnumerator();
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
