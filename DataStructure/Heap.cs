@@ -21,6 +21,20 @@ using System.Linq;
 ///              98     78
 ///             /  \   /  \
 ///            5    4 3    2
+///            
+/// Removal operation of the Heap is performed on the root node of the Heap.
+/// The root element is replaced with the last element of the Heap and 
+/// last element is removed from the Heap and HeapLength is decreased by 1.
+/// Heapify is performed inorder to satisfy the properties of Heap.
+/// 
+/// Heap insertion is always performed at the end of the Heap.
+/// Heap size is increased by one and element to be added is placed on
+/// the last node of the Heap.
+/// 
+/// Thus In Mean Heap, always minimum value are extracted while performing
+/// removal opearation.
+/// And in case of Max Heap always maximum values are extracted while 
+/// performing insert operation.
 /// </summary>
 namespace BinaryHeap
 {
@@ -143,11 +157,15 @@ namespace BinaryHeap
             }
         }
         /// <summary>
-        /// Heapify is the process of creating a heap data structure from a binary tree. It is used to create a Min-Heap or a Max-Heap.
-        /// Maintains the heap property, the condition in which the heap element should be placed in the heap.
+        /// Maintains the heap property.
+        /// Incase of Min Heap Heapify Top checks if 
+        /// parent element is smaller then the child. 
+        /// If parent element is greater
+        /// then the child it swaps parent with child . This process
+        /// repeats until the parent is smaller then child
         /// </summary>
         /// <param name="index">Index</param>
-        protected override void Heapify(int index)
+        protected override void HeapifyTop(int index)
         {
             if (index >= HeapLength)
                 return;
@@ -161,9 +179,23 @@ namespace BinaryHeap
                 {
                     //Swap index item with parent item
                     Swap(parent, index);
-                    Heapify(parent);
+                    HeapifyTop(parent);
                 }
             }
+        }
+        /// <summary>
+        /// Maintains the heap property.
+        /// Incase of Min Heap HeapifyBottom checks if child 
+        /// element is greater then the parent. 
+        /// If child element is smaller
+        /// then the parent it swaps 
+        /// parent with child . This process
+        /// repeats until the child is greater then parent.
+        /// </summary>
+        /// <param name="index">Index</param>
+        protected override void HeapifyBottom(int index)
+        {
+            
             int leftChild = LeftChild(index);
             int rightChild = RightChild(index);
             int smallestChild;
@@ -177,7 +209,7 @@ namespace BinaryHeap
             if (this.heap[index].CompareTo(this.heap[smallestChild]) > 0)
             {
                 Swap(smallestChild, index);
-                Heapify(smallestChild);
+                HeapifyBottom(smallestChild);
             }
         }
     }
@@ -268,11 +300,15 @@ namespace BinaryHeap
             return false;
         }
         /// <summary>
-        /// Heapify is the process of creating a heap data structure from a binary tree. It is used to create a Min-Heap or a Max-Heap.
-        /// Maintains the heap property, the condition in which the heap element should be placed in the heap.
+        /// Maintains the heap property.
+        /// Incase of MaxHeap HeapifyTop checks if parent 
+        /// element is greatr then the child. If parent 
+        /// element is smaller then the child it swaps 
+        /// parent with child. This process
+        /// repeats until the parent is greater then child.
         /// </summary>
         /// <param name="index">Index</param>
-        protected override void Heapify(int index)
+        protected override void HeapifyTop(int index)
         {
             if (index >= HeapLength)
                 return;
@@ -285,9 +321,20 @@ namespace BinaryHeap
                 if (this.heap[parent].CompareTo(this.heap[index]) > 0)
                 {
                     Swap(parent, index);
-                    Heapify(parent);
+                    HeapifyTop(parent);
                 }
             }
+        }
+        /// <summary>
+        /// Maintains the heap property.
+        /// Incase of MaxHeap HeapifyBottom checks if child element is 
+        /// smaller then the parent. If child element is greater
+        /// then the parent it swaps parent with child. This process
+        /// repeats until the child is smaller then parent.
+        /// </summary>
+        /// <param name="index">Index</param>
+        protected override void HeapifyBottom(int index)
+        {
             int leftChild = LeftChild(index);
             int rightChild = RightChild(index);
             int largestChild;
@@ -301,7 +348,7 @@ namespace BinaryHeap
             if (this.heap[index].CompareTo(this.heap[largestChild]) >= 0)
             {
                 Swap(largestChild, index);
-                Heapify(largestChild);
+                HeapifyBottom(largestChild);
             }
         }
         /// <summary>
@@ -437,7 +484,9 @@ namespace BinaryHeap
             //For 0 based Heap
             return (child - 1) / 2;
         }
-        protected abstract void Heapify(int index);
+        protected abstract void HeapifyTop(int index);
+        protected abstract void HeapifyBottom(int index);
+
         /// <summary>
         /// Insert item into Heap.
         /// Heap inserts item into the right most empty node
@@ -448,7 +497,7 @@ namespace BinaryHeap
             this.heap.Add(element);
             int temp = this.HeapLength;
             this.HeapLength++;
-            Heapify(temp);
+            HeapifyTop(temp);
         }
         /// <summary>
         /// Remove item from Heap.
@@ -463,7 +512,7 @@ namespace BinaryHeap
             this.heap[0] = this.heap[this.HeapLength - 1];
             this.heap[this.HeapLength - 1] = default;
             this.HeapLength--;
-            Heapify(0);
+            HeapifyBottom(0);
             return elementRemove;
         }
         /// <summary>

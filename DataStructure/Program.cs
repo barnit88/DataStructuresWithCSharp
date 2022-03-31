@@ -12,27 +12,27 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
+            MinHeap<int> heap = new MinHeap<int>();
+            heap.Insert(2);
+            heap.Insert(2);
+            heap.Insert(3);
+            heap.Insert(43);
+            heap.Insert(3);
+            heap.Insert(4);
+            heap.Insert(4);
+            heap.Insert(5);
+            heap.Insert(1);
 
+            foreach (var item in heap)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("-------");
+            while(heap.HeapLength > 0)
+            {
+                Console.WriteLine(heap.Remove());
+            }
 
-            var priorityQueue = new PriorityQueue<int>();
-            priorityQueue.Enqueue(2,2);
-            priorityQueue.Enqueue(2,2);
-            priorityQueue.Enqueue(3,3);
-            priorityQueue.Enqueue(43,43);
-            priorityQueue.Enqueue(3,3);
-            priorityQueue.Enqueue(4,5);
-            priorityQueue.Enqueue(4,4);
-            priorityQueue.Enqueue(5,6);
-            priorityQueue.Enqueue(1,1);
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
-            Console.WriteLine(priorityQueue.Dequeue());
             //foreach(var item in priorityQueue)
             //{
             //    Console.WriteLine(item);
@@ -40,6 +40,28 @@ namespace DataStructure
             Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
+        static void PriorityQueue()
+        {
+            var priorityQueue = new PriorityQueue<int>();
+            priorityQueue.Enqueue(2, 2);
+            priorityQueue.Enqueue(2, 2);
+            priorityQueue.Enqueue(3, 3);
+            priorityQueue.Enqueue(43, 43);
+            priorityQueue.Enqueue(3, 3);
+            priorityQueue.Enqueue(4, 5);
+            priorityQueue.Enqueue(4, 4);
+            priorityQueue.Enqueue(5, 6);
+            priorityQueue.Enqueue(1, 1);
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+        } 
         static void DoublyLinkedList()
         {
             DoublyLinkedList<int> integerlist = new DoublyLinkedList<int>();
