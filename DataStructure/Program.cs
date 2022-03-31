@@ -14,28 +14,28 @@ namespace DataStructure
         {
 
 
-            int[] arr = { 1, 2, 3, 4, 5, 56, 67, 12 };
-            List<string> arrList = new List<string>(){ 
-                "Barnit","Basnet","Heapify","Element","Apple"};
-            Func<int, int> rightChild = (root) =>
-            {
-                return root * 2 + 2;
-            };
-            Console.WriteLine(rightChild(2));
-            //MinHeap<int> minHeap = new MinHeap<int>(arr);
-            
-            //minHeap.Insert(1);
-            //minHeap.Insert(10);
-            //minHeap.Insert(100);
-            //minHeap.Insert(2);
-            //minHeap.Insert(3);
-            //minHeap.Insert(5);
-            //minHeap.Insert(6);
-            //Console.WriteLine(minHeap.Contains(3));
-            //Console.WriteLine("---------");
-            //foreach(var x in minHeap)
+            var priorityQueue = new PriorityQueue<int>();
+            priorityQueue.Enqueue(2,2);
+            priorityQueue.Enqueue(2,2);
+            priorityQueue.Enqueue(3,3);
+            priorityQueue.Enqueue(43,43);
+            priorityQueue.Enqueue(3,3);
+            priorityQueue.Enqueue(4,5);
+            priorityQueue.Enqueue(4,4);
+            priorityQueue.Enqueue(5,6);
+            priorityQueue.Enqueue(1,1);
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            Console.WriteLine(priorityQueue.Dequeue());
+            //foreach(var item in priorityQueue)
             //{
-            //    Console.WriteLine(x);
+            //    Console.WriteLine(item);
             //}
             Console.WriteLine("Hello World!");
             Console.ReadKey();
@@ -52,10 +52,6 @@ namespace DataStructure
             integerlist.AddFirst(3);
             integerlist.AddFirst(2);
             integerlist.AddFirst(1);
-            foreach (int data in integerlist)
-            {
-                Console.WriteLine(data);
-            }
             var datas = integerlist.GetReverseEnumerator();
             foreach (var da in datas)
             {

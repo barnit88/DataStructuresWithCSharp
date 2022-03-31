@@ -1,6 +1,7 @@
 ﻿using BinaryHeap;
 using LinkedList;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace QueueImplementation
@@ -107,41 +108,100 @@ namespace QueueImplementation
     ///  child node.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class PriorityQueue<T> : IPriorityQueue<T> where T : IComparable<T> 
+    public class PriorityQueue<T> : IPriorityQueue<T>,IEnumerable<T> where T : IComparable<T> 
     {
-
+        public int Size { get; private set; } = 0;
         private MinHeap<Node> minHeap;
-        public PriorityQueue(){}
         /// <summary>
-        /// Remove item from queue
+        /// Default constructor that intializes priority queue with default capacity.
         /// </summary>
-        /// <returns></returns>
+        public PriorityQueue(){
+            minHeap = new MinHeap<Node>();
+        }
+        /// <summary>
+        /// Remove object from PriorityQueue with highest prioirty
+        /// </summary>
+        /// <returns>Object that is removed from PriorityQueue</returns>
         public T Dequeue()
         {
             return minHeap.Remove().Data;
         }
         /// <summary>
-        /// 
+        /// Insert Object into PriorityQueue
         /// </summary>
-        /// <param name="priority"></param>
-        /// <param name="item"></param>
+        /// <param name="priority">Priority of Object</param>
+        /// <param name="item">Object to be inserted into PriorityQueue</param>
         public void Enqueue(int priority,T item)
         {
-            var node = new Node(priority, item);
-            minHeap.Insert(node);
+            try
+            {
+                this.Size++;
+                var node = new Node(priority, item);
+                minHeap.Insert(node);
+            }
+            catch (Exception ex)
+            {
+                this.Size--;
+            }
         }
-        public void GetPriority(T item)
+        /// <summary>
+        /// Searches the PriorityQueue for given object and returns the priority of the object
+        /// </summary>
+        /// <param name="item">Object</param>
+        /// <returns>Returns priority of the first object that matches the given object</returns>
+        public int GetPriority(T item)
         {
-            throw new NotImplementedException();
+            foreach (var element in minHeap)
+            {
+                if (element.Data.CompareTo(item) == 0)
+                    return element.Priority;
+            }
+            return -1;
         }
+        /// <summary>
+        /// Check if the object is in the Priority Queue
+        /// </summary>
+        /// <param name="item">Object that is to be checked in the Priority Queue</param>
+        /// <returns>Return true if the given object is in the Priority Queue otherwise, false</returns>
         public bool IsInQueue(T item)
         {
-            throw new NotImplementedException();
+            return GetPriority(item) > -1 ? true : false;
         }
-        public void UpdatePriority(T item)
+        /// <summary>
+        /// Updates the priority of the given object.
+        /// For  multiple items that matches the same object, highest priority object in the priority queues priorty will be updated
+        /// </summary>
+        /// <param name="item">Objects whose priority is to be updated</param>
+        /// <returns>Return true if priority is updates otherwise false</returns>
+        public bool UpdatePriority(T item,int priority)
+        {
+            foreach (var element in minHeap)
+            {
+
+                if (element.Data.CompareTo(item) == 0)
+                {
+                    element.Priority = priority;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            T[] data = new T[minHeap.HeapLength];
+            int index = 0;
+            while(minHeap.HeapLength > 0)
+            {
+                data[index] = minHeap.Remove().Data;
+                index++;
+            }
+            return ((IEnumerable<T>)data).GetEnumerator();
+        }
+        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// Each Node contains the data and priority of the data
         /// </summary>
@@ -168,12 +228,12 @@ namespace QueueImplementation
     }
     public interface IPriorityQueue<T>
     {
+        int Size { get; }
         T Dequeue();
         void Enqueue(int priority,T item);
         bool IsInQueue(T item);
-        void GetPriority(T item);
-        void UpdatePriority(T item);
-
+        int GetPriority(T item);
+        bool UpdatePriority(T item,int priority);
     }
 }
 

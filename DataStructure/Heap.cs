@@ -149,7 +149,7 @@ namespace BinaryHeap
         /// <param name="index">Index</param>
         protected override void Heapify(int index)
         {
-            if (index > HeapLength)
+            if (index >= HeapLength)
                 return;
             int parent = GetParent(index);
             //Parent node exists
@@ -172,9 +172,9 @@ namespace BinaryHeap
             if (rightChild >= this.HeapLength)
                 smallestChild = leftChild;
             else
-                smallestChild = this.heap[leftChild].CompareTo(this.heap[rightChild]) <= 0 ? leftChild : rightChild;
+                smallestChild = this.heap[leftChild].CompareTo(this.heap[rightChild]) < 0 ? leftChild : rightChild;
 
-            if (this.heap[index].CompareTo(this.heap[smallestChild]) >= 0)
+            if (this.heap[index].CompareTo(this.heap[smallestChild]) > 0)
             {
                 Swap(smallestChild, index);
                 Heapify(smallestChild);
@@ -274,7 +274,7 @@ namespace BinaryHeap
         /// <param name="index">Index</param>
         protected override void Heapify(int index)
         {
-            if (index > HeapLength)
+            if (index >= HeapLength)
                 return;
             int parent = GetParent(index);
             //Parent node exists
@@ -398,7 +398,7 @@ namespace BinaryHeap
         /// </summary>
         /// <param name="x">Index of item</param>
         /// <param name="y">Index of item</param>
-        public virtual void Swap(int x, int y)
+        protected virtual void Swap(int x, int y)
         {
             T temp = this.heap[x];
             this.heap[x] = this.heap[y];
@@ -463,7 +463,7 @@ namespace BinaryHeap
             this.heap[0] = this.heap[this.HeapLength - 1];
             this.heap[this.HeapLength - 1] = default;
             this.HeapLength--;
-            Heapify(this.HeapLength);
+            Heapify(0);
             return elementRemove;
         }
         /// <summary>
@@ -509,7 +509,6 @@ namespace BinaryHeap
     public interface IHeap<T>
     {
         int HeapLength { get; set; }
-        void Swap(int x, int y);
         int LeftChild(int index);
         int RightChild(int index);
         void Insert(T element);
