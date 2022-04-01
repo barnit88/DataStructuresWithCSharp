@@ -15,24 +15,18 @@ namespace QueueImplementation
     /// that each element has certain priority. The priority 
     /// of the element in the queue determines the order in 
     /// which the elements are removed from the Priority Queue.
-    /// NOTE :- Priority Queue only supports comparabnle data,
-    /// meaning the data inserted into the priority queue must be
+    /// NOTE :- Priority Queue only supports comparable data type.
+    /// The data inserted into the priority queue must be
     /// ordered in some way either from least to greatest or
-    /// greatest to least. This is so that we are able4 to 
+    /// greatest to least. This is so that we are able to 
     /// assign relative priorities to each element.
     /// 
     /// ### Abstract Data Type 
-    /// Abstract Data Type is are those data type which can perform 
-    /// certain set of operations but how doesn't care about how it is 
+    /// Abstract Data Type are those data type which can perform 
+    /// certain set of operations but doesn't care about how it is 
     /// implemented. It does not specify how data is to be stored in 
     /// the memory and what algorithms will be used for implementating 
     /// the operations.
-    /// 
-    /// ### What is a HEAP?
-    /// A heap is a tree based Data Struture that statisfies the
-    /// heap invariant (also called heap property): If A is a 
-    /// parent node of B then A is ordered with respect to B for
-    /// all nodes A, B in the heap.
     /// 
     /// ### When and where is A PQ used?
     /// 1> Used in certail implementations of Djikstra's
@@ -41,10 +35,10 @@ namespace QueueImplementation
     /// or next worst element.
     /// 3> Used in Huffman coding( which is ofter used for 
     /// lossless data compression).
-    /// 4> Best Firsdt Search (BFS) algorithms such as A*
+    /// 4> Best First Search (BFS) algorithms such as A*
     ///  use PQs to continously grab the next most promising 
     ///  node.
-    ///  5> Use by minimum spanning tree (MST) algorithms.
+    /// 5> Use by minimum spanning tree (MST) algorithms.
     ///  
     /// ### Complexity PQ with Binary Heap
     /// BINARY HEAP CONSTRUCTION :- O(n)
@@ -71,7 +65,7 @@ namespace QueueImplementation
     /// time complexity.
     /// 
     /// The Priority Queue(PQ) is an Abstract Data Type(ADT),
-    /// hence heaps are not teh only way to impelement PQs. As 
+    /// hence heaps are not the only way to impelement PQs. As 
     /// an example, we could use an usorted list, but this 
     /// would not give us the best possible time complexity.
     /// 
@@ -88,24 +82,12 @@ namespace QueueImplementation
     /// Heap Invariant. A Binary Heap is either Min Heap or 
     /// Max Heap. A binary heap is typically represented as 
     /// array.
+    /// 
     /// ## Complete Binary Tree
     ///  A complete binary tree is a tree in which at every 
-    ///  level except possibley the last level is completely 
+    ///  level except possibly the last level is completely 
     ///  filled and all the nodes are as far left as possible.
     /// 
-    ///  # HEAP 
-    ///  Heap is a Binary Tree where the value is 
-    ///  inserted to the left most empty node and 
-    ///  removed from the right most node and must 
-    ///  follow the HEAP Invariant i.e The tree must 
-    ///  be maximally balanced and every node must be
-    ///  smaller then parent node for MAX Heap and 
-    ///  greater then parnet node for MEAN Heap.
-    ///  There are two types of HEAP and they are :
-    ///  1> Min HEAP :- The parent must me smaller then
-    ///  child node.
-    ///  2> Max HEAP :- The parent must be greater then 
-    ///  child node.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class PriorityQueue<T> : IPriorityQueue<T>,IEnumerable<T> where T : IComparable<T> 
@@ -119,7 +101,7 @@ namespace QueueImplementation
             minHeap = new MinHeap<Node>();
         }
         /// <summary>
-        /// Remove object from PriorityQueue with highest prioirty
+        /// Remove object from PriorityQueue with lowest prioirty
         /// </summary>
         /// <returns>Object that is removed from PriorityQueue</returns>
         public T Dequeue()
@@ -202,16 +184,6 @@ namespace QueueImplementation
             catch (Exception ex) {
                 return false;
             }
-
-            //foreach (var element in minHeap)
-            //{
-            //    if (element.Data.CompareTo(item) == 0)
-            //    {
-            //        element.Priority = priority;
-            //        return true;
-            //    }
-            //}
-            //return false;
         }
         public IEnumerator<T> GetEnumerator()
         {
@@ -230,7 +202,7 @@ namespace QueueImplementation
         }
 
         /// <summary>
-        /// Each Node contains the data and priority of the data
+        /// Each Node contains object and its priority
         /// </summary>
         private class Node : IComparable
         {
@@ -240,11 +212,11 @@ namespace QueueImplementation
                 Data = data;
             }
             /// <summary>
-            /// Priority of the data
+            /// Priority 
             /// </summary>
             public int Priority { get; set; }
             /// <summary>
-            /// Item that holds data
+            /// Object
             /// </summary>
             public T Data { get; set; }
             public int CompareTo(object obj)

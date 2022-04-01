@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 /// <summary>
 /// A Binary Heap or Heap is a Tree based Data Structure 
-/// where the tree is a complete Binary tree.
+/// where the tree is a complete Binary tree which follows 
+/// HEAP Invariant (Heap Property) i.e: The tree must 
+///  be maximally balanced and every node must be
+///  smaller then parent node for MAX Heap and 
+///  greater then parnet node for MIN Heap.
 /// There are two types of Heap :- 
 /// 1> Min Heap :- In Min Heap the element based at the 
 /// parent node must be smaller then the child node.
@@ -25,11 +29,11 @@ using System.Linq;
 /// Removal operation of the Heap is performed on the root node of the Heap.
 /// The root element is replaced with the last element of the Heap and 
 /// last element is removed from the Heap and HeapLength is decreased by 1.
-/// Heapify is performed inorder to satisfy the properties of Heap.
+/// Heapify is performed inorder to satisfy the properties of Heap(HEAP Invariant).
 /// 
 /// Heap insertion is always performed at the end of the Heap.
 /// Heap size is increased by one and element to be added is placed on
-/// the last node of the Heap.
+/// the last node of the Heap(HEAP Invariant).
 /// 
 /// Thus In Mean Heap, always minimum value are extracted while performing
 /// removal opearation.
