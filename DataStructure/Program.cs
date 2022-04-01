@@ -12,26 +12,27 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
-            MinHeap<int> heap = new MinHeap<int>();
-            heap.Insert(2);
-            heap.Insert(2);
-            heap.Insert(3);
-            heap.Insert(43);
-            heap.Insert(3);
-            heap.Insert(4);
-            heap.Insert(4);
-            heap.Insert(5);
-            heap.Insert(1);
+            PriorityQueue();
+            //MinHeap<int> heap = new MinHeap<int>();
+            //heap.Insert(2);
+            //heap.Insert(2);
+            //heap.Insert(3);
+            //heap.Insert(43);
+            //heap.Insert(3);
+            //heap.Insert(4);
+            //heap.Insert(4);
+            //heap.Insert(5);
+            //heap.Insert(1);
 
-            foreach (var item in heap)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("-------");
-            while(heap.HeapLength > 0)
-            {
-                Console.WriteLine(heap.Remove());
-            }
+            //foreach (var item in heap)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            //Console.WriteLine("-------");
+            //while(heap.HeapLength > 0)
+            //{
+            //    Console.WriteLine(heap.Remove());
+            //}
 
             //foreach(var item in priorityQueue)
             //{
@@ -52,6 +53,7 @@ namespace DataStructure
             priorityQueue.Enqueue(4, 4);
             priorityQueue.Enqueue(5, 6);
             priorityQueue.Enqueue(1, 1);
+            priorityQueue.UpdatePriority(43, 2);
             Console.WriteLine(priorityQueue.Dequeue());
             Console.WriteLine(priorityQueue.Dequeue());
             Console.WriteLine(priorityQueue.Dequeue());

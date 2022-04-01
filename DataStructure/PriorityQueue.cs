@@ -124,7 +124,17 @@ namespace QueueImplementation
         /// <returns>Object that is removed from PriorityQueue</returns>
         public T Dequeue()
         {
-            return minHeap.Remove().Data;
+            try
+            {
+                this.Size--;
+                return minHeap.Remove().Data;
+            }
+            catch (Exception ex)
+            {
+                this.Size++;
+                return default;
+            }
+
         }
         /// <summary>
         /// Insert Object into PriorityQueue
@@ -175,16 +185,33 @@ namespace QueueImplementation
         /// <returns>Return true if priority is updates otherwise false</returns>
         public bool UpdatePriority(T item,int priority)
         {
-            foreach (var element in minHeap)
+            try
             {
-
-                if (element.Data.CompareTo(item) == 0)
+                int index = 0;
+                while (minHeap.HeapLength > index)
                 {
-                    element.Priority = priority;
-                    return true;
+                    if (minHeap[index].Data.CompareTo(item) == 0)
+                    {
+                        minHeap[index].Priority = priority;
+                        return true;
+                    }
+                    index++;
                 }
+                return false;
             }
-            return false;
+            catch (Exception ex) {
+                return false;
+            }
+
+            //foreach (var element in minHeap)
+            //{
+            //    if (element.Data.CompareTo(item) == 0)
+            //    {
+            //        element.Priority = priority;
+            //        return true;
+            //    }
+            //}
+            //return false;
         }
         public IEnumerator<T> GetEnumerator()
         {
