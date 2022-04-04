@@ -60,6 +60,78 @@ namespace DSA.Test
             }
         }
 
+        [Fact]
+        public void Constructor_CheckConstructorWithCapacityAsParameter()
+        {
+            var heap = new MinHeap<int>(2);
+            Assert.Throws<Exception>(() =>
+            {
+                if((heap.Peek()).GetType() == typeof(int)){
+                    throw new Exception("Trying out Assert.Exception");
+                }
+            });
+            Assert.Equal(0, heap.HeapLength);
+            Assert.Equal(0, heap.Peek());
+        }
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 41, 5, 65, 67 })]
+        public void Constructor_CheckOverloadedConstrutorAcceptionCollection(int[] arr)
+        {
+            minHeap = new MinHeap<int>(arr);
+            Assert.Equal(arr.Length,minHeap.HeapLength);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 41, 5, 65, 67 })]
+        public void Contains_CheckIfContainsReturnTrue(int[] arr)
+        {
+            minHeap = new MinHeap<int>();
+            foreach (var item in arr)
+            {
+                minHeap.Insert(item);
+            }
+            Assert.True(minHeap.Contains(arr[0]));
+        }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 41, 5, 65, 67 })]
+        public void Remove_CheckIfItemIsRemoved(int[] arr)
+        {
+            minHeap = new MinHeap<int>(arr);
+            foreach(var item in arr)
+            {
+                Assert.Contains(minHeap.Remove(), arr);
+            }
+        }
+
+        [Theory]
+        [InlineData(new int[] { 1, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 2, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 3, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 4, 5, 65, 67 })]
+        [InlineData(new int[] { 2, 23, 36, 41, 5, 65, 67 })]
+        public void Peek_CheckIfPeekIsWorkingOrNot(int[] arr)
+        {
+            minHeap = new MinHeap<int>(arr);
+            Assert.Contains(minHeap.Peek(), arr);
+            Assert.Equal(arr[0], minHeap.Peek());
+            
+        }
+
+
+
     }
 
 }

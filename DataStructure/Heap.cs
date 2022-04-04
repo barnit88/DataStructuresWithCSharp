@@ -460,7 +460,7 @@ namespace BinaryHeap
         /// </summary>
         /// <param name="index">Parent Index</param>
         /// <returns>Left Child index</returns>
-        public virtual int LeftChild(int index)
+        protected virtual int LeftChild(int index)
         {
             //2* index + 0 for 1 based heap
             //For zero based Heap
@@ -471,7 +471,7 @@ namespace BinaryHeap
         /// </summary>
         /// <param name="index">Parent Index</param>
         /// <returns>Right Child Index</returns>
-        public virtual int RightChild(int index)
+        protected virtual int RightChild(int index)
         {
             //2*index +1 for 1 based Heap
             //For zero based Heap
@@ -482,7 +482,7 @@ namespace BinaryHeap
         /// </summary>
         /// <param name="child">Child Index</param>
         /// <returns>Parent index</returns>
-        public virtual int GetParent(int child)
+        protected virtual int GetParent(int child)
         {
             // child/2 for 1 based Heap
             //For 0 based Heap
@@ -498,6 +498,10 @@ namespace BinaryHeap
         /// <param name="element">Item</param>
         public virtual void Insert(T element)
         {
+            if(HeapCapacity == this.heap.Count)
+            {
+                this.HeapCapacity += 64;
+            }
             this.heap.Add(element);
             int temp = this.HeapLength;
             this.HeapLength++;
@@ -562,8 +566,6 @@ namespace BinaryHeap
     public interface IHeap<T>
     {
         int HeapLength { get; set; }
-        int LeftChild(int index);
-        int RightChild(int index);
         void Insert(T element);
         T Remove();
         T Peek();
