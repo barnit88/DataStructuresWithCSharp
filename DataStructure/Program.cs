@@ -12,32 +12,22 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
-            PriorityQueue();
-            //MinHeap<int> heap = new MinHeap<int>();
-            //heap.Insert(2);
-            //heap.Insert(2);
-            //heap.Insert(3);
-            //heap.Insert(43);
-            //heap.Insert(3);
-            //heap.Insert(4);
-            //heap.Insert(4);
-            //heap.Insert(5);
-            //heap.Insert(1);
-
-            //foreach (var item in heap)
-            //{
-            //    Console.WriteLine(item);
-            //}
-            //Console.WriteLine("-------");
-            //while(heap.HeapLength > 0)
-            //{
-            //    Console.WriteLine(heap.Remove());
-            //}
-
-            //foreach(var item in priorityQueue)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            //PriorityQueue();
+            Dictionary<int, string> dict = new Dictionary<int, string>()
+            {
+                { 1,"barnit" },
+                { 2,"barnit" },
+                { 3,"barnit" },
+                { 4,"barnit" },
+                { 5,"barnit" },
+                { 6,"barnit" },
+                { 7,"barnit" },
+                { 8,"barnit" }
+            }; 
+            foreach(KeyValuePair<int,string> kv in dict)
+            {
+                Console.WriteLine(kv.Key);
+            }
             Console.WriteLine("Hello World!");
             Console.ReadKey();
         }

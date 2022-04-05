@@ -92,7 +92,11 @@ namespace QueueImplementation
     /// <typeparam name="T"></typeparam>
     public class PriorityQueue<T> : IPriorityQueue<T>,IEnumerable<T> where T : IComparable<T> 
     {
+        /// <summary>
+        /// Size of the Priority Queue
+        /// </summary>
         public int Size { get; private set; } = 0;
+
         private MinHeap<Node> minHeap;
         /// <summary>
         /// Default constructor that intializes priority queue with default capacity.
@@ -127,6 +131,8 @@ namespace QueueImplementation
         {
             try
             {
+                if (priority < 0)
+                    return;
                 this.Size++;
                 var node = new Node(priority, item);
                 minHeap.Insert(node);
