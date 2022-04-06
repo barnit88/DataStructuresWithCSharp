@@ -5,6 +5,7 @@ using BinaryHeap;
 using QueueImplementation;
 using System.Collections;
 using System.Collections.Generic;
+using Tree;
 
 namespace DataStructure
 {
@@ -12,22 +13,14 @@ namespace DataStructure
     {
         static void Main(string[] args)
         {
-            //PriorityQueue();
-            Dictionary<int, string> dict = new Dictionary<int, string>()
-            {
-                { 1,"barnit" },
-                { 2,"barnit" },
-                { 3,"barnit" },
-                { 4,"barnit" },
-                { 5,"barnit" },
-                { 6,"barnit" },
-                { 7,"barnit" },
-                { 8,"barnit" }
-            }; 
-            foreach(KeyValuePair<int,string> kv in dict)
-            {
-                Console.WriteLine(kv.Key);
-            }
+            BinarySearchTree<int> bst = new BinarySearchTree<int>();
+            bst.Insert(100);
+            bst.Insert(2);
+            bst.Insert(120);
+            bst.Insert(22);
+            bst.Insert(32);
+            bst.Insert(89);
+
             Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
