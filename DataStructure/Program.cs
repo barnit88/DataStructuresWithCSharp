@@ -20,9 +20,19 @@ namespace DataStructure
             bst.Insert(22);
             bst.Insert(32);
             bst.Insert(89);
+            bst.Remove(2);
+            var person = new Person("Barnit", "basnet");
+            Console.WriteLine(person.firstName);
 
+            Check(person);
+            Console.WriteLine(person.firstName);
             Console.WriteLine("Hello World!");
             Console.ReadKey();
+        }
+        static void Check(Person data)
+        {
+            var x = data;
+            x.firstName = "hari Parsad";
         }
         static void PriorityQueue()
         {
@@ -70,7 +80,12 @@ namespace DataStructure
         {
             public string firstName;
             public string lastName;
-       
+            public Person(string name1, string name2)
+            {
+                firstName = name1;
+                lastName = name2;
+
+            }
             public int CompareTo(object obj)
             {
                 return this.firstName.CompareTo(((Person)obj).firstName);

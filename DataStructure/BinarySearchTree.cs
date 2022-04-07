@@ -81,7 +81,7 @@ namespace Tree
             }
             else
             {
-                this.Insert(this.RootNode,item);
+                this.Insert(this.RootNode, item);
             }
         }
         private void Insert(Node node,T item)
@@ -98,7 +98,7 @@ namespace Tree
                     Insert(node.RightNode, item);
                 }
             }
-            else
+            else if (item.CompareTo(node.Data) < 0)
             {
                 if (node.LeftNode == null)
                 {
@@ -109,6 +109,10 @@ namespace Tree
                 {
                     Insert(node.LeftNode, item);
                 }
+            }
+            else
+            {
+                return;
             }
         }
 
@@ -121,23 +125,122 @@ namespace Tree
         {
             throw new NotImplementedException();
         }
-
         public T Remove(T item)
         {
-            throw new NotImplementedException();
+            T returnData = default;
+            if (this.RootNode == null)
+                return returnData;
+            if (item.CompareTo(this.Root) == 0)
+            {
+                returnData = this.Root;
+                this.RootNode = null;
+                return returnData;
+            }
+            else
+                return RemoveData(this.RootNode, item);
         }
+        
+        private T RemoveData(Node node,T item)
+        {
+            T returnData = default;
+            if (node == null)
+            {
+                return default;
+            }
+            if(node.LeftNode.Data.CompareTo(item) == 0)
+            {
+                returnData = node.LeftNode.Data;
+                if (node.LeftNode.LeftNode == null && node.LeftNode.RightNode == null)
+                    node.LeftNode = null;
+                else if (node.LeftNode.LeftNode != null && node.LeftNode.RightNode == null)
+                    node.LeftNode = node.LeftNode.LeftNode;
+                else if (node.LeftNode.LeftNode == null && node.LeftNode.RightNode != null)
+                    node.LeftNode = node.LeftNode.RightNode;
+                else
+                {
+                    var refNode = node.LeftNode.RightNode;
+                    var traverse = node.LeftNode.LeftNode;
+                    while (traverse != null)
+                    {
+                        if (traverse.RightNode == null)
+                        {
+                            traverse.RightNode = refNode;
+                            traverse = null;
+                        }
+                    }
+                }
+                return returnData;
+            }
+            else if (node.RightNode.Data.CompareTo(item) == 0)
+            {
+                node.RightNode = node.RightNode;
+                returnData = node.RightNode.Data;
+
+                if (node.RightNode.LeftNode == null && node.RightNode.RightNode == null)
+                    node.RightNode = null;
+                else if (node.RightNode.LeftNode != null && node.RightNode.RightNode == null)
+                    node.RightNode = node.RightNode.LeftNode;
+                else if (node.RightNode.LeftNode == null && node.RightNode.RightNode != null)
+                    node.RightNode = node.RightNode.RightNode;
+                else
+                {
+                    var refNode = node.RightNode.RightNode;
+                    var traverse = node.RightNode.LeftNode;
+                    while(traverse != null)
+                    {
+                        if(traverse.RightNode == null)
+                        {
+                            traverse.RightNode = refNode;
+                            traverse = null;
+                        }
+                    }
+                }
+                return returnData;
+            }
+            else
+            {
+                if (item.CompareTo(node.Data) > 0)
+                    RemoveData(node.RightNode, item);
+                else
+                    RemoveData(node.LeftNode, item);
+            }
+            return returnData;
+        }
+
 
         public bool Search(T item)
         {
-            throw new NotImplementedException();
+            Node traverse = this.RootNode;
+            while (traverse != null)
+            {
+                if (item.CompareTo(traverse.Data) == 0)
+                    return true;
+                else if (item.CompareTo(traverse.Data) > 0)
+                    traverse = traverse.RightNode;
+                else if (item.CompareTo(traverse.Data) < 0)
+                    traverse = traverse.LeftNode;
+            }
+            return false;
         }
-
+        private (Node node,bool available) GetNode(T item)
+        {
+            Node traverse = this.RootNode;
+            while (traverse != null)
+            {
+                if (item.CompareTo(traverse.Data) == 0)
+                    return (traverse,true);
+                else if (item.CompareTo(traverse.Data) > 0)
+                    traverse = traverse.RightNode;
+                else if (item.CompareTo(traverse.Data) < 0)
+                    traverse = traverse.LeftNode;
+            }
+            return (traverse,false);
+        }
         private class Node : IComparable<T>
         {
             public Node LeftNode { get; set; }
             public Node RightNode { get; set; }
             public T Data { get; set; }
-
             public Node(T Data,Node LeftNode = null,Node RightNode = null)
             {
                 this.Data = Data;
