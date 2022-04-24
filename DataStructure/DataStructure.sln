@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStructure", "DataStructure.csproj", "{86BE9888-93DF-4088-8B0B-472AC47E29EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSA.Test", "..\DSA.Test\DSA.Test.csproj", "{8FCDE7DF-2DCF-4C98-9051-5D907CFCA83A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSA.Test", "..\DSA.Test\DSA.Test.csproj", "{8FCDE7DF-2DCF-4C98-9051-5D907CFCA83A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0E816443-4E54-4CD4-AF2E-81D6DD087FE2}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
