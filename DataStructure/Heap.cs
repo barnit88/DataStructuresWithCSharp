@@ -6,9 +6,9 @@ using System.Linq;
 /// A Binary Heap or Heap is a Tree based Data Structure 
 /// where the tree is a complete Binary tree which follows 
 /// HEAP Invariant (Heap Property) i.e: The tree must 
-///  be maximally balanced and every node must be
-///  smaller then parent node for MAX Heap and 
-///  greater then parnet node for MIN Heap.
+/// be maximally balanced and every node must be
+/// smaller then parent node for MAX Heap and 
+/// greater then parnet node for MIN Heap.
 /// There are two types of Heap :- 
 /// 1> Min Heap :- In Min Heap the element based at the 
 /// parent node must be smaller then the child node.
@@ -43,7 +43,7 @@ using System.Linq;
 namespace BinaryHeap
 {
     /// <summary>
-    /// A Min Heap is a Binary Heap(Binary Tree Based Data Structure) where the parnet node is
+    /// A Min Heap is a Binary Heap(Binary Tree Based Data Structure) where the parent node is
     /// always smaller then the child nodes.
     /// </summary>
     /// <typeparam name="T"></typeparam>
