@@ -1,4 +1,4 @@
-#Data Structure Implemented Using C-Sharp#
+#Data Structure Implemented Using C-Sharp
 
 ## Binary Search Tree 
 A Binary Search Tree is a tree based data structure. Each node in binary tree can have at most two children.
